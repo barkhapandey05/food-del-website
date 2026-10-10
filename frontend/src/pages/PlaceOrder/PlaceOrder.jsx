@@ -1,8 +1,9 @@
 import './PlaceOrder.css'
-import { StoreContext, useNavigate } from "../../context/StoreContext";
-import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
+import { useContext, useEffect } from "react";
 import { useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 const PlaceOrder = () => {
 
   const {getTotalCartAmount, token, food_list, cartItems, url} = useContext(StoreContext)

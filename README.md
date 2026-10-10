@@ -33,6 +33,8 @@ Edit `backend/.env` and set:
 
 | Variable | Description |
 | --- | --- |
+| `PORT` | API port; defaults to `4000` locally (the hosting platform can provide this automatically) |
+| `FRONTEND_URL` | Storefront origin used for Stripe checkout return URLs; locally `http://localhost:5174` |
 | `MONGODB_URI` | Connection string for your MongoDB database |
 | `JWT_SECRET` | A long, private random string used to sign login tokens |
 | `STRIPE_SECRET_KEY` | Your Stripe secret key (use a test key for local development) |
@@ -71,6 +73,10 @@ npm run dev
 ```
 
 Open the URL printed by Vite (normally `http://localhost:5173`).
+
+## Production environment
+
+Configure the backend's `MONGODB_URI`, `JWT_SECRET`, `STRIPE_SECRET_KEY`, and `FRONTEND_URL` in your hosting provider's environment settings. Set `FRONTEND_URL` to the deployed customer storefront URL; the backend uses the hosting platform's `PORT` when provided and otherwise listens on port `4000`. Set `VITE_API_URL` in both frontend hosting projects to the deployed backend URL, then rebuild/redeploy them.
 
 ## Available scripts
 
