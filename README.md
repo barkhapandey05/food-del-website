@@ -1,6 +1,6 @@
 # Food Delivery App
 
-A food delivery application with a customer-facing storefront, an admin dashboard, and an Express API backed by MongoDB. The storefront supports browsing food, managing a cart, placing orders, and viewing order history. The admin dashboard supports adding and managing food items and viewing and updating orders.
+Food Delivery App is a full-stack food ordering platform where customers can browse a menu, manage a shopping cart, check out with Stripe, and track their orders. It includes a React storefront, a separate admin dashboard for managing menu items and orders, and an Express API with MongoDB for data storage and user authentication.
 
 ## Project structure
 
@@ -90,4 +90,3 @@ Open the URL printed by Vite (normally `http://localhost:5173`).
 - Never commit `.env` files, Stripe secret keys, database credentials, or JWT secrets. The backend `.gitignore` excludes `.env` files; review `git status` before pushing.
 - `backend/.env.example` contains placeholders only. Put your real values in `backend/.env`.
 - If a real secret has already been exposed or pushed to a repository, revoke or rotate it with the relevant provider.
-
