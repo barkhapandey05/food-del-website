@@ -4,12 +4,18 @@ import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext'
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = ({setShowLogin, searchText, setSearchText}) => {
 
   const[menu,setMenu] = useState("menu");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const {getTotalCartAmount, token, setToken} = useContext(StoreContext);
   const navigate = useNavigate();
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    navigate("/", { state: { scrollToFood: true } });
+  }
 
   const logout = ()=>{
     localStorage.removeItem("token");
@@ -27,7 +33,32 @@ const Navbar = ({setShowLogin}) => {
         <a href = '#footer' onClick={()=> setMenu("contact-us")} className= {menu=== "contact-us"? "active": ""}>contact us</a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        <form className="navbar-search" role="search" onSubmit={handleSearchSubmit}>
+          {isSearchOpen && (
+            <input
+              autoFocus
+              type="search"
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setSearchText("");
+                  setIsSearchOpen(false);
+                }
+              }}
+              placeholder="Search dishes"
+              aria-label="Search dishes"
+            />
+          )}
+          <button
+            type={isSearchOpen ? "submit" : "button"}
+            aria-label={isSearchOpen ? "Search menu" : "Open food search"}
+            aria-expanded={isSearchOpen}
+            onClick={!isSearchOpen ? () => setIsSearchOpen(true) : undefined}
+          >
+            <img src={assets.search_icon} alt="" />
+          </button>
+        </form>
         <div className="navbar-search-icon">
           <Link to = '/cart'><img src={assets.basket_icon} alt="" /></Link>
           <div className={getTotalCartAmount()===0 ? "" : "dot"}></div>
